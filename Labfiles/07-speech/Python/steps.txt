@@ -1,0 +1,17 @@
+1.
+cd Labfiles/07-speech/Python/speaking-clock
+
+2.
+python -m venv labenv
+
+3.
+.\labenv\Scripts\activate.bat
+
+4.
+pip install -r requirements.txt azure-cognitiveservices-speech==1.42.0
+
+5.
+Add endpoint and key in .env
+
+if debugging, add this 
+"cwd": "${fileDirname}"

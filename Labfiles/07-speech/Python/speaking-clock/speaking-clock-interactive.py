@@ -29,6 +29,9 @@ def main():
         if command.lower() == 'what time is it?':
             TellTime()
 
+        if command.lower() == 'who is the best?':
+            TellTheBest()
+
     except Exception as ex:
         print(ex)
 
@@ -36,14 +39,11 @@ def TranscribeCommand():
     command = ''
 
     # Configure speech recognition
-    current_dir = os.getcwd()
-    audioFile = current_dir + '/time.wav'
-    audio_config = speech_sdk.AudioConfig(filename=audioFile)
+    audio_config = speech_sdk.AudioConfig(use_default_microphone=True)
     speech_recognizer = speech_sdk.SpeechRecognizer(speech_config, audio_config)
-
+    print('Speak now...')
 
     # Process speech input
-    print("Listening...")
     speech = speech_recognizer.recognize_once_async().get()
     if speech.reason == speech_sdk.ResultReason.RecognizedSpeech:
         command = speech.text
@@ -55,7 +55,6 @@ def TranscribeCommand():
             print(cancellation.reason)
             print(cancellation.error_details)
 
-
     # Return the command
     return command
 
@@ -66,32 +65,30 @@ def TellTime():
 
 
     # Configure speech synthesis
-    output_file = "output.wav"
     speech_config.speech_synthesis_voice_name = "en-GB-RyanNeural"
-    audio_config = speech_sdk.audio.AudioConfig(filename=output_file)
-    speech_synthesizer = speech_sdk.SpeechSynthesizer(speech_config, audio_config,)
-    
+    audio_config = speech_sdk.audio.AudioOutputConfig(use_default_speaker=True)
+    speech_synthesizer = speech_sdk.SpeechSynthesizer(speech_config, audio_config)
 
     # Synthesize spoken output
-    # speak = speech_synthesizer.speak_text_async(response_text).get()
-    # if speak.reason != speech_sdk.ResultReason.SynthesizingAudioCompleted:
-    #     print(speak.reason)
-    # else:
-    #     print("Spoken output saved in " + output_file)
-    responseSsml = " \
-        <speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'> \
-            <voice name='en-GB-LibbyNeural'> \
-                {} \
-                <break strength='weak'/> \
-                Time to end this lab! \
-            </voice> \
-        </speak>".format(response_text)
-    speak = speech_synthesizer.speak_ssml_async(responseSsml).get()
+    speak = speech_synthesizer.speak_text_async(response_text).get()
     if speak.reason != speech_sdk.ResultReason.SynthesizingAudioCompleted:
         print(speak.reason)
-    else:
-        print("Spoken output saved in " + output_file)
 
+    # Print the response
+    print(response_text)
+
+def TellTheBest():
+    response_text = 'The best engineer is Santiago Romano!'
+
+    # Configure speech synthesis
+    speech_config.speech_synthesis_voice_name = "en-GB-RyanNeural"
+    audio_config = speech_sdk.audio.AudioOutputConfig(use_default_speaker=True)
+    speech_synthesizer = speech_sdk.SpeechSynthesizer(speech_config, audio_config)
+
+    # Synthesize spoken output
+    speak = speech_synthesizer.speak_text_async(response_text).get()
+    if speak.reason != speech_sdk.ResultReason.SynthesizingAudioCompleted:
+        print(speak.reason)
 
     # Print the response
     print(response_text)
