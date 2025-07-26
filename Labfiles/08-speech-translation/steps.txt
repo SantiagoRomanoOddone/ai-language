@@ -1,0 +1,17 @@
+1.
+cd Labfiles\08-speech-translation\Python\translator
+
+2.
+python -m venv labenv
+
+3.
+.\labenv\Scripts\activate.bat
+
+4.
+pip install -r requirements.txt azure-cognitiveservices-speech==1.42.0
+
+5.
+Add endpoint and key in .env
+
+if debugging, add this 
+"cwd": "${fileDirname}"
