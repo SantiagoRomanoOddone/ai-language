@@ -1,0 +1,17 @@
+1.
+cd Labfiles/05-custom-entity-recognition/Python/custom-entities
+
+2.
+python -m venv labenv
+
+3.
+.\labenv\Scripts\activate.bat
+
+4.
+pip install -r requirements.txt azure-ai-textanalytics==5.3.0
+
+5.
+Add endpoint and key in .env
+
+if debugging, add this 
+"cwd": "${fileDirname}"
