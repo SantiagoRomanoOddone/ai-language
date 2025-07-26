@@ -1,0 +1,17 @@
+1.
+cd Labfiles/06-translator-sdk/Python/translate-text
+
+2.
+python -m venv labenv
+
+3.
+.\labenv\Scripts\activate.bat
+
+4.
+pip install -r requirements.txt azure-ai-translation-text==1.0.1
+
+5.
+Add endpoint and key in .env
+
+if debugging, add this 
+"cwd": "${fileDirname}"
