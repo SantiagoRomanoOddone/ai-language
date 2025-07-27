@@ -1,0 +1,17 @@
+1.
+cd Labfiles/09-audio-chat/Python
+
+2.
+python -m venv labenv
+
+3.
+.\labenv\Scripts\activate.bat
+
+4.
+pip install -r requirements.txt azure-identity azure-ai-projects openai
+
+5.
+Add endpoint and key in .env
+
+if debugging, add this 
+"cwd": "${fileDirname}"
